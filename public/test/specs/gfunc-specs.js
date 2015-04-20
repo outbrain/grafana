@@ -32,6 +32,15 @@ define([
       expect(func.text).to.equal("groupByNode(5, avg)");
     });
 
+    it('func instance should have text representation', function() {
+      var func = gfunc.createFuncInstance('groupByNodeRegex');
+      func.params[0] = 5;
+      func.params[1] = '.*';
+      func.params[2] = 'avg';
+      func.updateText();
+      expect(func.text).to.equal("groupByNodeRegex(5, .*, avg)");
+    });
+
   });
 
   describe('when rendering func instance', function() {
@@ -63,6 +72,14 @@ define([
       func.params[0] = 5;
       func.params[1] = 'avg';
       expect(func.render('hello.metric')).to.equal("groupByNode(hello.metric, 5, 'avg')");
+    });
+
+    it('should handle metric param and int param and string param and another string param', function() {
+      var func = gfunc.createFuncInstance('groupByNodeRegex');
+      func.params[0] = 5;
+      func.params[1] = ".*";
+      func.params[2] = 'avg';
+      expect(func.render('hello.metric')).to.equal("groupByNodeRegex(hello.metric, 5, '.*', 'avg')");
     });
 
     it('should handle function with no metric param', function() {
