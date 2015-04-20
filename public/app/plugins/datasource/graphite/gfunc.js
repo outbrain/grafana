@@ -249,6 +249,28 @@ function (_, $) {
   });
 
   addFuncDef({
+    name: "groupByNodeRegex",
+    category: categories.Special,
+    params: [
+      {
+        name: "node",
+        type: "int",
+        options: [0,1,2,3,4,5,6,7,8,9,10,12]
+      },
+      {
+        name: "regex",
+        type: "string"
+      },
+      {
+        name: "function",
+        type: "string",
+        options: ['sum', 'avg']
+      }
+    ],
+    defaultParams: [3, "sum"]
+  });
+
+  addFuncDef({
     name: 'aliasByNode',
     category: categories.Special,
     params: [
